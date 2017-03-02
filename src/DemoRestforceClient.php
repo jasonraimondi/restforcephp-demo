@@ -1,11 +1,12 @@
 <?php
 namespace EventFarm\RestforceDemo;
 
+use EventFarm\Restforce\Oauth\AccessTokenInterface;
+use EventFarm\Restforce\Oauth\SalesforceProviderInterface;
+use EventFarm\Restforce\Oauth\StevenMaguireSalesforceProvider;
 use EventFarm\Restforce\RestforceClient;
 use EventFarm\Restforce\RestforceClientInterface;
 use Silex\Application;
-use Stevenmaguire\OAuth2\Client\Provider\Salesforce;
-use Stevenmaguire\OAuth2\Client\Token\AccessToken;
 
 class DemoRestforceClient
 {
@@ -19,16 +20,17 @@ class DemoRestforceClient
         $this->app = $app;
     }
 
-    public static function getProviderWithDefaults(): Salesforce
+    public static function getProviderWithDefaults(): SalesforceProviderInterface
     {
-        return new Salesforce([
-            'clientId' => getenv('SALESFORCE_CLIENT_ID'),
-            'clientSecret' => getenv('SALESFORCE_CLIENT_SECRET'),
-            'redirectUri' => getenv('SALESFORCE_REDIRECT_URL'),
-        ]);
+        return StevenMaguireSalesforceProvider::createDefaultProvider(
+            getenv('SALESFORCE_CLIENT_ID'),
+            getenv('SALESFORCE_CLIENT_SECRET'),
+            getenv('SALESFORCE_REDIRECT_URL'),
+            'https://login.salesforce.com'
+        );
     }
 
-    public function getRestforceClient(AccessToken $accessToken): RestforceClientInterface
+    public function getRestforceClient(AccessTokenInterface $accessToken): RestforceClientInterface
     {
         if (empty($this->restforce)) {
             $this->restforce = RestforceClient::withDefaults(
