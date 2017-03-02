@@ -1,0 +1,26 @@
+{
+    "name": "eventfarm/restforce-demo",
+    "description": "Restforce Demo",
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1",
+        "twig/twig": "^2.2",
+        "silex/silex": "^2.0",
+        "league/commonmark": "^0.15.3",
+        "league/commonmark-extras": "^0.1.2",
+        "eventfarm/restforcephp": "^1.2",
+        "vlucas/phpdotenv": "^2.4",
+        "stevenmaguire/oauth2-salesforce": "^2.0",
+        "moust/silex-cache": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "EventFarm\\RestforceDemo\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "EventFarm\\RestforceDemo\\Tests\\": "tests"
+        }
+    }
+}

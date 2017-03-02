@@ -1,0 +1,18 @@
+{# @var reflection \ReflectionClass #}
+
+{% extends '@site/layouts/default.twig' %}
+
+{% block content %}
+
+    <h1>Scripts</h1>
+    <ul>
+        {% for method in reflection.methods %}
+            <li>
+                <a href="/{{ method.name }}" target="_blank">{{ method.name }}</a>
+                {#<iframe src="http://localhost:8087/{{ method.name }}" frameborder="0"></iframe>#}
+            </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock %}
